@@ -35,5 +35,32 @@ Tech Stack
 - Bootstrap 5 
 - Azure DevOps (Repos + Pipelines)
 
-## 📁 Project Structure
+Project Structure
 
+DisasterAlleviationFoundation/
+├─ Controllers/
+│ ├─ AccountController.cs
+│ ├─ IncidentsController.cs
+│ ├─ DonationsController.cs
+│ └─ VolunteersController.cs
+├─ Data/
+│ ├─ ApplicationDbContext.cs
+│ └─ Migrations/ (EF Core migrations)
+├─ Models/
+│ ├─ Incident.cs
+│ ├─ Donation.cs
+│ └─ VolunteerTask.cs 
+│ └─ ViewModels/ (Login/Register etc.)
+├─ Views/
+│ ├─ Shared/ (_Layout.cshtml, _ViewImports.cshtml, _ViewStart.cshtml)
+│ ├─ Home/ (Index.cshtml)
+│ ├─ Account/ (Login.cshtml, Register.cshtml)
+│ ├─ Incidents/ (Index/Create/Edit/Details/Delete.cshtml)
+│ ├─ Donations/ (Index/Create/Details.cshtml)
+│ └─ Volunteers/ (Index/Create/MySignups.cshtml)
+├─ wwwroot/
+│ ├─ css/site.css
+│ └─ lib/ 
+├─ appsettings.json
+├─ Program.cs
+└─ azure-pipelines.yml
