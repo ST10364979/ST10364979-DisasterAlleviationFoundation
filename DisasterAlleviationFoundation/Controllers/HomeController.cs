@@ -6,8 +6,10 @@ namespace DisasterAlleviationFoundation.Controllers
 {
     public class HomeController : Controller
     {
+        // Logger for this controller
         private readonly ILogger<HomeController> _logger;
 
+        // Inject the logger via DI
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -26,6 +28,7 @@ namespace DisasterAlleviationFoundation.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
+            // Provide a request id to the view for troubleshooting.
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }

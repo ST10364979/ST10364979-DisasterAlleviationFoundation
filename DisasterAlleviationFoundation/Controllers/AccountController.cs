@@ -6,12 +6,14 @@ namespace DisasterAlleviationFoundation.Controllers
 {
     public class AccountController : Controller
     {
+        // Identity services injected by DI container
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
         public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         { _userManager = userManager; _signInManager = signInManager; }
 
+        // REGISTER
         [HttpGet]
         public IActionResult Register(string? returnUrl = null) { ViewData["ReturnUrl"] = returnUrl; return View(); }
 
@@ -32,6 +34,7 @@ namespace DisasterAlleviationFoundation.Controllers
             return View(vm);
         }
 
+        //Login
         [HttpGet]
         public IActionResult Login(string? returnUrl = null) { ViewData["ReturnUrl"] = returnUrl; return View(); }
 
@@ -39,6 +42,8 @@ namespace DisasterAlleviationFoundation.Controllers
         public async Task<IActionResult> Login(LoginViewModel vm, string? returnUrl = null)
         {
             if (!ModelState.IsValid) return View(vm);
+
+            // Look up the user by email
             var user = await _userManager.FindByEmailAsync(vm.Email);
             if (user == null) { ModelState.AddModelError("", "No account found with that email."); return View(vm); }
 
@@ -52,6 +57,7 @@ namespace DisasterAlleviationFoundation.Controllers
             return View(vm);
         }
 
+        //Logout
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout() { await _signInManager.SignOutAsync(); return RedirectToAction("Index", "Home"); }
     }
