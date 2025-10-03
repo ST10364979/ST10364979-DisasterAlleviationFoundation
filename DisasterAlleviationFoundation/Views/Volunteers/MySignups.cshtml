@@ -1,0 +1,21 @@
+﻿@model IEnumerable<DisasterAlleviationFoundation.Models.VolunteerSignup>
+@{
+    ViewData["Title"] = "My Signups";
+}
+<h2>My Volunteer Signups</h2>
+@if (!Model.Any())
+{
+    <div class="alert alert-info">You haven't signed up for any tasks yet.</div>
+}
+else
+{
+    <ul class="list-group">
+        @foreach (var s in Model)
+        {
+            <li class="list-group-item">
+                <strong>@s.VolunteerTask!.Title</strong> — @s.VolunteerTask.Location
+                <span class="text-muted"> (@(s.VolunteerTask.ScheduledAt?.ToString("yyyy-MM-dd HH:mm") ?? "-"))</span>
+            </li>
+        }
+    </ul>
+}

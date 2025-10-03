@@ -1,0 +1,72 @@
+﻿@* Modern blue layout + glass cards *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DisasterAlleviationFoundation</title>
+
+    <!-- optional font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="bg-app">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark nav-glass">
+            <div class="container">
+                <a class="navbar-brand fw-bold brand" asp-controller="Home" asp-action="Index">
+                    <span class="brand-dot"></span> DisasterAlleviationFoundation
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="nav">
+                    <ul class="navbar-nav me-auto gap-1">
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Incidents" asp-action="Index">Incidents</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Donations" asp-action="Index">Donations</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Volunteers" asp-action="Tasks">Volunteers</a></li>
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto gap-2">
+                        @if (User.Identity?.IsAuthenticated ?? false)
+                        {
+                            <li class="nav-item"><span class="nav-link disabled">Hello @User.Identity!.Name</span></li>
+                            <li class="nav-item">
+                                <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-cta">Logout</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a class="btn btn-sm btn-ghost" asp-controller="Account" asp-action="Login">Login</a></li>
+                            <li class="nav-item"><a class="btn btn-sm btn-cta" asp-controller="Account" asp-action="Register">Register</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container py-4">
+        <div class="card glass shadow-xl">
+            <div class="card-body p-4">
+                @RenderBody()
+            </div>
+        </div>
+    </main>
+
+    <footer class="container py-4 text-center text-light-200">
+        <small>© @DateTime.Now.Year · DisasterAlleviationFoundation</small>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,21 @@
+﻿@model DisasterAlleviationFoundation.Models.Incident
+@using DisasterAlleviationFoundation.Models
+@{
+    ViewData["Title"] = "Report Incident";
+}
+<h2>Report Incident</h2>
+<form asp-action="Create" method="post" asp-anti-forgery="true">
+    <div class="mb-3"><label asp-for="Title"></label><input asp-for="Title" class="form-control" /><span asp-validation-for="Title" class="text-danger"></span></div>
+    <div class="mb-3"><label asp-for="Description"></label><textarea asp-for="Description" rows="4" class="form-control"></textarea><span asp-validation-for="Description" class="text-danger"></span></div>
+    <div class="mb-3"><label asp-for="Location"></label><input asp-for="Location" class="form-control" /><span asp-validation-for="Location" class="text-danger"></span></div>
+    <div class="row mb-3">
+        <div class="col"><label asp-for="OccurredAt"></label><input asp-for="OccurredAt" type="datetime-local" class="form-control" /></div>
+        <div class="col"><label asp-for="Severity"></label><select asp-for="Severity" class="form-select" asp-items="Html.GetEnumSelectList<IncidentSeverity>()"></select></div>
+        <div class="col"><label asp-for="Status"></label><select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<IncidentStatus>()"></select></div>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

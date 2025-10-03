@@ -1,0 +1,19 @@
+﻿@model DisasterAlleviationFoundation.Models.VolunteerTask
+@{
+    ViewData["Title"] = "Create Task";
+}
+<h2>Create Volunteer Task</h2>
+<form asp-action="CreateTask" method="post" asp-anti-forgery="true">
+    <div class="mb-3"><label asp-for="Title"></label><input asp-for="Title" class="form-control" /><span asp-validation-for="Title" class="text-danger"></span></div>
+    <div class="mb-3"><label asp-for="Description"></label><textarea asp-for="Description" rows="3" class="form-control"></textarea><span asp-validation-for="Description" class="text-danger"></span></div>
+    <div class="row mb-3">
+        <div class="col"><label asp-for="Location"></label><input asp-for="Location" class="form-control" /></div>
+        <div class="col"><label asp-for="ScheduledAt"></label><input asp-for="ScheduledAt" type="datetime-local" class="form-control" /></div>
+        <div class="col"><label asp-for="Slots"></label><input asp-for="Slots" class="form-control" /></div>
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a asp-action="Tasks" class="btn btn-secondary">Cancel</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

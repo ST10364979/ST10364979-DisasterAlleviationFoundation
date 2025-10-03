@@ -1,0 +1,21 @@
+﻿@model DisasterAlleviationFoundation.Models.Donation
+@using DisasterAlleviationFoundation.Models
+@{
+    ViewData["Title"] = "Make a Donation";
+}
+<h2>Make a Donation</h2>
+<form asp-action="Create" method="post" asp-anti-forgery="true">
+    <div class="mb-3"><label asp-for="DonorName"></label><input asp-for="DonorName" class="form-control" /><span asp-validation-for="DonorName" class="text-danger"></span></div>
+    <div class="mb-3"><label asp-for="DonorEmail"></label><input asp-for="DonorEmail" class="form-control" /></div>
+    <div class="row mb-3">
+        <div class="col"><label asp-for="Type"></label><select asp-for="Type" class="form-select" asp-items="Html.GetEnumSelectList<DonationType>()"></select></div>
+        <div class="col"><label asp-for="Quantity"></label><input asp-for="Quantity" class="form-control" /></div>
+        <div class="col"><label asp-for="Status"></label><select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<DonationStatus>()"></select></div>
+    </div>
+    <div class="mb-3"><label asp-for="Notes"></label><textarea asp-for="Notes" rows="3" class="form-control"></textarea></div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

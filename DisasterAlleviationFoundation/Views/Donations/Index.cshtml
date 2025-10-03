@@ -1,0 +1,30 @@
+﻿@model IEnumerable<DisasterAlleviationFoundation.Models.Donation>
+@using DisasterAlleviationFoundation.Models
+@{
+    ViewData["Title"] = "Donations";
+}
+<h2>Donations</h2>
+<p><a class="btn btn-primary" asp-action="Create">Make a Donation</a></p>
+@if (!Model.Any())
+{
+    <div class="alert alert-info">No donations yet.</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead><tr><th>Donor</th><th>Type</th><th>Qty</th><th>Status</th><th>Created</th><th></th></tr></thead>
+        <tbody>
+            @foreach (var d in Model)
+            {
+                <tr>
+                    <td>@d.DonorName</td>
+                    <td>@d.Type</td>
+                    <td>@d.Quantity</td>
+                    <td>@d.Status</td>
+                    <td>@d.CreatedAt.ToString("yyyy-MM-dd")</td>
+                    <td><a asp-action="Details" asp-route-id="@d.Id">View</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

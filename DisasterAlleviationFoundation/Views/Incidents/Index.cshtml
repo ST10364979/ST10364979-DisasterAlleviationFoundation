@@ -1,0 +1,39 @@
+﻿@model IEnumerable<DisasterAlleviationFoundation.Models.Incident>
+@using DisasterAlleviationFoundation.Models
+@{
+    ViewData["Title"] = "Incidents"; var items = Model ?? Enumerable.Empty<Incident>();
+}
+
+<h2>Incidents</h2>
+<p><a class="btn btn-primary" asp-action="Create">Report Incident</a></p>
+
+@if (!items.Any())
+{
+    <div class="alert alert-info">No incidents yet.</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead><tr><th>Title</th><th>Location</th><th>Occurred</th><th>Severity</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+            @foreach (var i in items)
+            {
+                <tr>
+                    <td>@i.Title</td>
+                    <td>@i.Location</td>
+                    <td>@i.OccurredAt.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td><span class="badge text-bg-secondary">@i.Severity</span></td>
+                    <td><span class="badge text-bg-secondary">@i.Status</span></td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@i.Id">View</a>
+                        @if (User.Identity?.IsAuthenticated ?? false)
+                        {
+                            @: | <a asp-action="Edit" asp-route-id="@i.Id">Edit</a>
+                            @: | <a asp-action="Delete" asp-route-id="@i.Id">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
